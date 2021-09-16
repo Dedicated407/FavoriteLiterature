@@ -2,7 +2,15 @@
     <string name="app_name">Favorite Literature</string>
 
     <!-- MainMenuFragment -->
-    <string name="MainMenuFragment_Button_text_AddAuthor">Add author</string>
     <string name="MainMenuFragment_TextView_title_MainMenu">Main menu</string>
+    <string name="MainMenuFragment_Button_text_AddAuthor">Add author</string>
+
+    <!-- AddBookFragment -->
+    <string name="AddBookFragment_TextView_title_AddNewBook">Add new book</string>
+    <string name="AddBookFragment_EditText_hint_BookName">Book name</string>
+    <string name="AddBookFragment_TextView_hint_ChooseAuthor">Choose an author</string>
+    <string name="AddBookFragment_TextView_text_HelpFindAuthor">Did not find the author in the list?</string>
+    <string name="AddBookFragment_Button_text_AddAuthor">Add new author</string>
+    <string name="AddBookFragment_Button_text_AddBook">Add book</string>
 
 </resources>
