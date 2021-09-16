@@ -1,4 +1,4 @@
-package com.dedicated407.favoriteliterature
+package com.dedicated407.favoriteLiterature
 
 import org.junit.Test
 
