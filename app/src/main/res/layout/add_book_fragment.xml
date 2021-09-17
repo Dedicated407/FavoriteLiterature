@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true" >
+    android:orientation="vertical" >
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/linear_add_new_book"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/title_add_book"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"
@@ -21,92 +24,61 @@
         <EditText
             android:id="@+id/input_book_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/title_add_book"
+            android:layout_height="50dp"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
-            android:autofillHints="name"
             android:hint="@string/AddBookFragment_EditText_hint_BookName"
             android:inputType="text"
-            android:nextFocusForward="@+id/input_password_registration" />
+            android:autofillHints="Book name" />
 
-        <TextView
-            android:id="@+id/textView_author"
+        <EditText
+            android:id="@+id/input_author_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/input_book_name"
+            android:layout_height="50dp"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
-            android:text="@string/AddBookFragment_TextView_hint_ChooseAuthor"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:hint="@string/AddBookFragment_EditText_hint_AuthorName"
+            android:inputType="text"
+            android:autofillHints="Author" />
 
-        <ScrollView
-            android:id="@+id/scrollView_authors"
+        <EditText
+            android:id="@+id/input_book_description"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_below="@id/textView_author"
+            android:layout_height="50dp"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="20dp" />
-
-
-<!--            <DatePicker-->
-<!--                android:id="@+id/date_picker_actions"-->
-<!--                android:layout_width="100dp"-->
-<!--                android:layout_height="100dp"-->
-<!--                android:layout_below="@+id/scrollView_authors"-->
-<!--                android:foregroundGravity="center" />-->
-
-        <LinearLayout
-            android:id="@+id/linearLayout_registration_author"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_below="@+id/scrollView_authors" >
+            android:hint="@string/AddBookFragment_EditText_hint_BookDescription"
+            android:inputType="textMultiLine"
+            android:lines="3"
+            android:minLines="1"
+            android:maxLines="10"
+            android:gravity="top|start"
+            android:maxLength="255"
+            android:scrollbars="vertical"
+            android:autofillHints="Description" />
+    </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="10dp"
-                android:text="@string/AddBookFragment_TextView_text_HelpFindAuthor"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+    <Button
+        android:id="@+id/btn_add_book"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="@string/AddBookFragment_Button_text_AddBook"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-            <Button
-                android:id="@+id/btn_add_new_author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="10dp"
-                android:text="@string/AddBookFragment_Button_text_AddAuthor"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_add_book"
-            android:layout_below="@+id/linearLayout_registration_author"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="center"
-            android:text="@string/AddBookFragment_Button_text_AddBook"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:focusableInTouchMode="true" >
-        </Button>
-
-    </RelativeLayout>
-
-</androidx.core.widget.NestedScrollView>
+</RelativeLayout>
