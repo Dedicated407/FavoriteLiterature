@@ -5,8 +5,6 @@ import com.dedicated407.favoriteLiterature.Domain.Model.Book
 import com.dedicated407.favoriteLiterature.Domain.Model.User
 import com.dedicated407.favoriteLiterature.Presentation.Repository.RepositoryTasks
 import androidx.lifecycle.MutableLiveData
-import java.time.LocalDate
-import java.time.LocalDateTime
 
 
 public class MockBase : RepositoryTasks {
@@ -26,7 +24,6 @@ public class MockBase : RepositoryTasks {
         book1.author.patronymic = "Pavlovich"
         book1.author.email = "ilyaboy@list.ru"
         book1.author.phone = "+7 (800) 555-35-35"
-        book1.author.lastVisit = LocalDateTime.now()
         list.add(book1)
         val book2 = Book(
             2,
@@ -60,8 +57,6 @@ public class MockBase : RepositoryTasks {
             )
         )
         book4.author.patronymic = "Pavlovich"
-        book4.author.dateOfBirth = LocalDate.of(1860, 1, 29)
-        book4.author.dateOfDeath = LocalDate.of(1904, 7,15)
         book4.description = "Ward №6. 1892. " +
                 "Summary of the story. " +
                 "It is read in 6 minutes, the original — 2 hours. " +
