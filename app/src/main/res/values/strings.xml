@@ -11,5 +11,6 @@
     <string name="AddBookFragment_EditText_hint_AuthorName">Author</string>
     <string name="AddBookFragment_EditText_hint_BookDescription">A brief description of your book</string>
     <string name="AddBookFragment_Button_text_AddBook">Add book</string>
+    <string name="AddBookFragment_Button_text_AllBooks">All books</string>
 
 </resources>

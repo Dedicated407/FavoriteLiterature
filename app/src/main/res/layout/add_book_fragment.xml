@@ -67,18 +67,40 @@
             android:autofillHints="Description" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_add_book"
+    <LinearLayout
+        android:id="@+id/linear_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:text="@string/AddBookFragment_Button_text_AddBook"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_show_all_books"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="@string/AddBookFragment_Button_text_AllBooks"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Button
+            android:id="@+id/btn_add_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="@string/AddBookFragment_Button_text_AddBook"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    </LinearLayout>
 
 </RelativeLayout>
