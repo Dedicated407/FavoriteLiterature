@@ -1,4 +1,4 @@
-package com.dedicated407.favoriteliterature
+package com.dedicated407.favoriteLiterature
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
