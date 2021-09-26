@@ -1,5 +1,6 @@
 package com.dedicated407.favoriteLiterature.Presentation.Views.Adapters
 
+import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
@@ -34,6 +35,9 @@ class BooksListAdapter(private var books: List<Book>) :
         holder: BookViewHolder,
         position: Int
     ) {
+//        if (books[position].images == null)
+//            holder.binding.bookImage.visibility = View.GONE
+        holder.binding.bookImage.setImageURI(Uri.parse(books[position].images?.get(0)))
         holder.binding.itemBookName.text = books[position].name
         holder.binding.itemAuthorName.text = books[position].author.toString()
     }
