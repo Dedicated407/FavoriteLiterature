@@ -8,7 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.dedicated407.favoriteLiterature.Domain.Model.Book
 import com.dedicated407.favoriteLiterature.Domain.Model.User
+import com.dedicated407.favoriteLiterature.Presentation.Room.Model.BookDTO
 import com.dedicated407.favoriteLiterature.Presentation.ViewModels.AddBookViewModel
 import com.dedicated407.favoriteLiterature.R
 import com.dedicated407.favoriteLiterature.databinding.AddBookFragmentBinding
@@ -31,9 +33,13 @@ class AddBookFragment : Fragment() {
         mBinding.btnAddBook.setOnClickListener { v ->
             if (mBinding.inputBookName.text.toString().isNotEmpty()) {
                 mViewModel.addBook(
-                    mBinding.inputBookName.text.toString(),
-                    User("", mBinding.inputAuthorName.text.toString()),
-                    mBinding.inputBookDescription.text.toString()
+                    BookDTO(
+                        Book(
+                            mBinding.inputBookName.text.toString(),
+                            User("", mBinding.inputAuthorName.text.toString()),
+                            mBinding.inputBookDescription.toString()
+                        )
+                    )
                 )
                 Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
                 Navigation.findNavController(v).navigate(R.id.action_addBook_to_listBooks)
