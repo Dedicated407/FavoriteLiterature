@@ -1,10 +1,12 @@
 package com.dedicated407.favoriteLiterature.Presentation.Views
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -16,8 +18,9 @@ import com.dedicated407.favoriteLiterature.R
 import com.dedicated407.favoriteLiterature.databinding.AddBookFragmentBinding
 
 class AddBookFragment : Fragment() {
-    private lateinit var mViewModel: AddBookViewModel
-    private lateinit var mBinding: AddBookFragmentBinding
+    private var mViewModel: AddBookViewModel? = null
+    private var mBinding: AddBookFragmentBinding? = null
+    private val images: MutableList<String> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,18 +29,23 @@ class AddBookFragment : Fragment() {
     ): View {
         mBinding = AddBookFragmentBinding.inflate(layoutInflater, container, false)
 
-        mBinding.btnShowAllBooks.setOnClickListener { v ->
+        mBinding!!.btnDownloadImage.setOnClickListener { _ ->
+            images.add(getContent.launch("image/*").toString())
+        }
+
+        mBinding!!.btnShowAllBooks.setOnClickListener { v ->
             Navigation.findNavController(v).navigate(R.id.action_addBook_to_listBooks)
         }
 
-        mBinding.btnAddBook.setOnClickListener { v ->
-            if (mBinding.inputBookName.text.toString().isNotEmpty()) {
-                mViewModel.addBook(
+        mBinding!!.btnAddBook.setOnClickListener { v ->
+            if (mBinding!!.inputBookName.text.toString().isNotEmpty()) {
+                mViewModel!!.addBook(
                     BookDTO(
                         Book(
-                            mBinding.inputBookName.text.toString(),
-                            User("", mBinding.inputAuthorName.text.toString()),
-                            mBinding.inputBookDescription.toString()
+                            mBinding!!.inputBookName.text.toString(),
+                            User(mBinding!!.inputAuthorName.text.toString(), ""),
+                            mBinding!!.inputBookDescription.toString(),
+                            images
                         )
                     )
                 )
@@ -50,7 +58,16 @@ class AddBookFragment : Fragment() {
 
         mViewModel = ViewModelProvider(this)[AddBookViewModel::class.java]
 
-        return mBinding.root
+        return mBinding!!.root
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding = null
+        mViewModel = null
+    }
+
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        mBinding?.bookImage?.setImageURI(uri)
+    }
 }
