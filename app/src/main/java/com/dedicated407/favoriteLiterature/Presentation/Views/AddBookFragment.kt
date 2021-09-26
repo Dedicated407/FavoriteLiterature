@@ -30,7 +30,7 @@ class AddBookFragment : Fragment() {
         mBinding = AddBookFragmentBinding.inflate(layoutInflater, container, false)
 
         mBinding!!.btnDownloadImage.setOnClickListener { _ ->
-            images.add(getContent.launch("image/*").toString())
+            getContent.launch("image/*")
         }
 
         mBinding!!.btnShowAllBooks.setOnClickListener { v ->
@@ -38,13 +38,13 @@ class AddBookFragment : Fragment() {
         }
 
         mBinding!!.btnAddBook.setOnClickListener { v ->
-            if (mBinding!!.inputBookName.text.toString().isNotEmpty()) {
+            if (mBinding!!.inputBookName.text.toString().isNotEmpty() && images.size != 0) {
                 mViewModel!!.addBook(
                     BookDTO(
                         Book(
                             mBinding!!.inputBookName.text.toString(),
                             User(mBinding!!.inputAuthorName.text.toString(), ""),
-                            mBinding!!.inputBookDescription.toString(),
+                            mBinding!!.inputBookDescription.text.toString(),
                             images
                         )
                     )
@@ -69,5 +69,6 @@ class AddBookFragment : Fragment() {
 
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         mBinding?.bookImage?.setImageURI(uri)
+        images.add(uri.toString())
     }
 }
