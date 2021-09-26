@@ -59,10 +59,10 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/btn_download_image"
+            android:id="@+id/btn_upload_image"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Download picture" />
+            android:text="@string/AddBookFragment_Button_text_UploadImage" />
 
         <ImageView
             android:id="@+id/book_image"

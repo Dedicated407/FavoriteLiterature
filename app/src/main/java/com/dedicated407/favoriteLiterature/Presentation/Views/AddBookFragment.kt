@@ -29,7 +29,7 @@ class AddBookFragment : Fragment() {
     ): View {
         mBinding = AddBookFragmentBinding.inflate(layoutInflater, container, false)
 
-        mBinding!!.btnDownloadImage.setOnClickListener { _ ->
+        mBinding!!.btnUploadImage.setOnClickListener { _ ->
             getContent.launch("image/*")
         }
 
