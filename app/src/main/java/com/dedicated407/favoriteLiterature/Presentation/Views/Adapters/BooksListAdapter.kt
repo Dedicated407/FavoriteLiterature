@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.annotation.NonNull
+import androidx.navigation.Navigation
 import com.dedicated407.favoriteLiterature.Domain.Model.Book
+import com.dedicated407.favoriteLiterature.R
 import com.dedicated407.favoriteLiterature.databinding.ListBooksItemFragmentBinding
 import org.jetbrains.annotations.NotNull
 import java.lang.Exception
@@ -21,7 +23,7 @@ class BooksListAdapter(private var books: List<Book>) :
         @NonNull
         @NotNull
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): BookViewHolder {
         val binding: ListBooksItemFragmentBinding =
             ListBooksItemFragmentBinding.inflate(
@@ -36,6 +38,11 @@ class BooksListAdapter(private var books: List<Book>) :
         holder: BookViewHolder,
         position: Int,
     ) {
+
+        holder.binding.cardViewList.setOnClickListener { v ->
+            Navigation.findNavController(v).navigate(R.id.action_listBooks_to_bookInfo)
+        }
+
         try {
             holder.binding.bookImage.setImageBitmap(
                 BitmapFactory.decodeFileDescriptor(
