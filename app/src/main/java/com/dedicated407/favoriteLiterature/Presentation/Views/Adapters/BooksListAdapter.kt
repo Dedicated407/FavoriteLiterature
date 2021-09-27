@@ -1,14 +1,15 @@
 package com.dedicated407.favoriteLiterature.Presentation.Views.Adapters
 
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
-import android.view.View
 import androidx.annotation.NonNull
 import com.dedicated407.favoriteLiterature.Domain.Model.Book
 import com.dedicated407.favoriteLiterature.databinding.ListBooksItemFragmentBinding
 import org.jetbrains.annotations.NotNull
+import java.lang.Exception
 
 
 class BooksListAdapter(private var books: List<Book>) :
@@ -33,11 +34,20 @@ class BooksListAdapter(private var books: List<Book>) :
 
     override fun onBindViewHolder(
         holder: BookViewHolder,
-        position: Int
+        position: Int,
     ) {
-//        if (books[position].images == null)
-//            holder.binding.bookImage.visibility = View.GONE
-        holder.binding.bookImage.setImageURI(Uri.parse(books[position].images?.get(0)))
+        try {
+            holder.binding.bookImage.setImageBitmap(
+                BitmapFactory.decodeFileDescriptor(
+                    holder.binding.bookImage.context.contentResolver.openFileDescriptor(
+                        Uri.parse(books[position].images?.get(0)), "r"
+                    )?.fileDescriptor
+                )
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         holder.binding.itemBookName.text = books[position].name
         holder.binding.itemAuthorName.text = books[position].author.toString()
     }

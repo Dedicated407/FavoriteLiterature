@@ -1,12 +1,15 @@
 package com.dedicated407.favoriteLiterature.Presentation.Views
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.OpenDocument
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -25,11 +28,18 @@ class AddBookFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         mBinding = AddBookFragmentBinding.inflate(layoutInflater, container, false)
 
-        mBinding!!.btnUploadImage.setOnClickListener { _ ->
+        mBinding!!.btnUploadImage.setOnClickListener {
+            activity?.activityResultRegistry?.register("key", OpenDocument()) { result ->
+                activity?.applicationContext?.contentResolver?.takePersistableUriPermission(
+                    result,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
+                images.add(images.size, result.toString())
+            }
             getContent.launch("image/*")
         }
 
