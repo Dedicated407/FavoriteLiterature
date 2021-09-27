@@ -14,4 +14,13 @@
     <string name="AddBookFragment_Button_text_AddBook">Add book</string>
     <string name="AddBookFragment_Button_text_AllBooks">All books</string>
 
+    <!-- BookInfoFragment -->
+    <string name="BookInfoFragment_TextView_title_BookInfo">___</string>
+    <string name="BookInfoFragment_TextView_label_BookName">Book name:</string>
+    <string name="BookInfoFragment_TextView_label_AuthorName">Author:</string>
+    <string name="BookInfoFragment_TextView_label_DescriptionBook">Description:</string>
+    <string name="BookInfoFragment_Button_text_ImageBook">Image book</string>
+    <string name="BookInfoFragment_Button_text_Share">Share</string>
+
+
 </resources>
