@@ -19,5 +19,8 @@ interface IBookDAO {
 
     @Query("SELECT * FROM book")
     fun getAllBooks(): LiveData<List<BookDTO>>
+
+    @Query("SELECT * FROM book WHERE id=:id")
+    fun getBook(id: String): LiveData<BookDTO>
 }
 

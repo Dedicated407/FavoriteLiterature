@@ -32,5 +32,6 @@ class BookRepository(application: Application) : IRepositoryTasks {
         }
     }
 
+    override fun getBook(id: String): LiveData<Book> = mIBookDao.getBook(id) as LiveData<Book>
 }
 

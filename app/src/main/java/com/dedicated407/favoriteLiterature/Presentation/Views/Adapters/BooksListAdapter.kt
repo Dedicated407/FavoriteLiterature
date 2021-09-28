@@ -2,12 +2,14 @@ package com.dedicated407.favoriteLiterature.Presentation.Views.Adapters
 
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.annotation.NonNull
 import androidx.navigation.Navigation
 import com.dedicated407.favoriteLiterature.Domain.Model.Book
+import com.dedicated407.favoriteLiterature.Presentation.Views.BookInfoFragment.Companion.BOOK_ID_ARG
 import com.dedicated407.favoriteLiterature.R
 import com.dedicated407.favoriteLiterature.databinding.ListBooksItemFragmentBinding
 import org.jetbrains.annotations.NotNull
@@ -40,7 +42,9 @@ class BooksListAdapter(private var books: List<Book>) :
     ) {
 
         holder.binding.cardViewList.setOnClickListener { v ->
-            Navigation.findNavController(v).navigate(R.id.action_listBooks_to_bookInfo)
+            val bundle = Bundle()
+            bundle.putString(BOOK_ID_ARG, books[position].id)
+            Navigation.findNavController(v).navigate(R.id.action_listBooks_to_bookInfo, bundle)
         }
 
         try {
