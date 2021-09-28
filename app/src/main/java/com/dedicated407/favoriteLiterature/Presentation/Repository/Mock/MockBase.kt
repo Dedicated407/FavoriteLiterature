@@ -1,5 +1,6 @@
 package com.dedicated407.favoriteLiterature.Presentation.Repository.Mock
 
+import androidx.lifecycle.LiveData
 import com.dedicated407.favoriteLiterature.Domain.Model.Book
 import com.dedicated407.favoriteLiterature.Domain.Model.User
 import com.dedicated407.favoriteLiterature.Presentation.Repository.IRepositoryTasks
@@ -12,6 +13,7 @@ class MockBase : IRepositoryTasks {
 
     init {
         val book1 = Book(
+            "0",
             "Kotlin",
             User(
                 "Ilya",
@@ -25,6 +27,7 @@ class MockBase : IRepositoryTasks {
 
 
         val book2 = Book(
+            "1",
             "The Bronze Horseman",
             User(
                 "Alex",
@@ -36,6 +39,7 @@ class MockBase : IRepositoryTasks {
 
 
         val book3 = Book(
+            "2",
             "War and Peace",
             User(
                 "Lev",
@@ -46,6 +50,7 @@ class MockBase : IRepositoryTasks {
         list.add(book3)
         
         val book4 = Book(
+            "3",
             "Ward №6",
             User(
                 "Anton",
@@ -77,4 +82,7 @@ class MockBase : IRepositoryTasks {
         data = MutableLiveData(list)
     }
 
+    override fun getBook(id: String): LiveData<Book> {
+        TODO("Not yet implemented")
+    }
 }

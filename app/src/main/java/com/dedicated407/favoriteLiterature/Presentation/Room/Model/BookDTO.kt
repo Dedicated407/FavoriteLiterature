@@ -9,7 +9,7 @@ import com.google.gson.Gson
 
 @Entity(tableName = "book", ignoredColumns = ["author", "images"])
 data class BookDTO(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey override val id: String,
     override val name: String?,
     val author_serialized: String,
     override val description: String?,
@@ -17,7 +17,7 @@ data class BookDTO(
 ) : Book() {
 
     constructor(book: Book) : this(
-        0,
+        book.id,
         book.name,
         Gson().toJson(book.author),
         book.description,
