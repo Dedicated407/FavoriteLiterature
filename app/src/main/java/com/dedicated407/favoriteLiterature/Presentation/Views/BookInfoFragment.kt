@@ -1,5 +1,7 @@
 package com.dedicated407.favoriteLiterature.Presentation.Views
 
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.dedicated407.favoriteLiterature.Presentation.ViewModels.BookInfoViewModel
 import com.dedicated407.favoriteLiterature.databinding.BookInfoFragmentBinding
+import java.lang.Exception
 
 class BookInfoFragment : Fragment() {
     private var mViewModel: BookInfoViewModel? = null
@@ -38,6 +41,17 @@ class BookInfoFragment : Fragment() {
         }
 
         mViewModel?.getBook(id)?.observe(viewLifecycleOwner) { book ->
+            try {
+                mBinding!!.bookInfoImage.setImageBitmap(
+                    BitmapFactory.decodeFileDescriptor(
+                        mBinding!!.bookInfoImage.context.contentResolver.openFileDescriptor(
+                            Uri.parse(book.images?.get(0)), "r"
+                        )?.fileDescriptor
+                    )
+                )
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
             mBinding!!.bookInfoName.text = book.name
             mBinding!!.bookInfoAuthor.text = book.author.toString()
             mBinding!!.bookInfoDescription.text = book.description
