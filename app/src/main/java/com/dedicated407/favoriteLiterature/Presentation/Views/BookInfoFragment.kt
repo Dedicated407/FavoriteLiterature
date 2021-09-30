@@ -45,7 +45,7 @@ class BookInfoFragment : Fragment() {
             mBinding?.bookInfoShare?.setOnClickListener{
                 val sendIntent = Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, "app://fav.lit.ru/book/" + book.id)
+                    putExtra(Intent.EXTRA_TEXT, "https://favlit.ru/book/" + book.id)
                     type = "text/plain"
                 }
                 val shareIntent = Intent.createChooser(sendIntent, null)

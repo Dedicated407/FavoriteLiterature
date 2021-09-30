@@ -37,7 +37,7 @@
             app:argType="string" />
         <deepLink
             android:id="@+id/book_link"
-            app:uri="app://fav.lit.ru/book/{book_id}" />
+            app:uri="https://favlit.ru/book/{book_id}" />
     </fragment>
 
     <fragment
