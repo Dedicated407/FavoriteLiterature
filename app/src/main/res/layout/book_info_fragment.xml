@@ -30,7 +30,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/normalMargin"
                 android:layout_gravity="center"
-                android:contentDescription="@string/BookInfoFragment_Button_text_ImageBook" />
+                android:contentDescription="@string/BookInfoFragment_ImageView_image_ImageBook" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/bookInfo_viewPager2"
@@ -145,30 +145,14 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <LinearLayout
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bookInfo_share"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:layout_anchor="@id/bookInfo_nestedScroll"
-        app:layout_anchorGravity="bottom"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/bigMargin"
+        android:src="@drawable/share"
+        android:contentDescription="@string/BookInfoFragment_Button_text_Share" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/bookInfo_back"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_margin="@dimen/halfMargin"
-            android:src="@android:drawable/ic_input_delete"
-            android:contentDescription="@string/BookInfoFragment_Button_text_Share" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/bookInfo_share"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_margin="@dimen/halfMargin"
-            android:src="@drawable/share"
-            android:contentDescription="@string/BookInfoFragment_Button_text_Share" />
-
-    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

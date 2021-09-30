@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,10 +19,6 @@ class BooksListFragment : Fragment() {
     private lateinit var mViewModel: BooksListViewModel
     private lateinit var mBinding: ListFragmentBinding
 
-    fun newInstance(): BooksListFragment {
-        return BooksListFragment()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,10 +26,6 @@ class BooksListFragment : Fragment() {
     ): View {
         mBinding = ListFragmentBinding.inflate(layoutInflater, container, false)
         mBinding.list.layoutManager = LinearLayoutManager(context)
-
-        mBinding.back.setOnClickListener{ v ->
-            Navigation.findNavController(v).popBackStack()
-        }
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             override fun onMove(

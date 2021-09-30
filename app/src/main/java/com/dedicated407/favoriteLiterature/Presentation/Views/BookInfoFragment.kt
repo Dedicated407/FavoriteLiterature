@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.dedicated407.favoriteLiterature.Presentation.ViewModels.BookInfoViewModel
 import com.dedicated407.favoriteLiterature.databinding.BookInfoFragmentBinding
@@ -52,10 +51,6 @@ class BookInfoFragment : Fragment() {
                 val shareIntent = Intent.createChooser(sendIntent, null)
                 startActivity(shareIntent)
             }
-        }
-
-        mBinding?.bookInfoBack?.setOnClickListener{ v ->
-            Navigation.findNavController(v).popBackStack()
         }
 
         return mBinding!!.root

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".Presentation.Views.AddBookFragment">
 
     <LinearLayout
         android:id="@+id/linear_add_new_book"
@@ -52,6 +53,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linear_upload_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -68,35 +70,18 @@
             android:id="@+id/book_image"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:contentDescription="@string/AddBookFragment_ImageView_image_ImageBook" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linear_buttons"
+    <Button
+        android:id="@+id/btn_add_book"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/normalMargin"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal" >
-        <Button
-            android:id="@+id/btn_show_all_books"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_margin="10dp"
-            android:text="@string/AddBookFragment_Button_text_AllBooks"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        <Button
-            android:id="@+id/btn_add_book"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:text="@string/AddBookFragment_Button_text_AddBook"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-    </LinearLayout>
+        android:text="@string/AddBookFragment_Button_text_AddBook"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
 </RelativeLayout>
