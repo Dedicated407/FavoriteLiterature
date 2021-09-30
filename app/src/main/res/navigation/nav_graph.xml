@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/add_book_fragment">
+    app:startDestination="@id/my_account_fragment">
 
     <fragment
         android:id="@+id/list_books_fragment"
@@ -46,6 +46,13 @@
         <deepLink
             android:id="@+id/book_link"
             app:uri="app://fav.lit.ru/book/{book_id}" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/my_account_fragment"
+        android:name="com.dedicated407.favoriteLiterature.Presentation.Views.MyAccountFragment"
+        android:label="my_account_fragment"
+        tools:layout="@layout/my_account_fragment">
     </fragment>
 
 </navigation>

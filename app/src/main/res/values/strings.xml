@@ -22,5 +22,10 @@
     <string name="BookInfoFragment_Button_text_ImageBook">Image book</string>
     <string name="BookInfoFragment_Button_text_Share">Share</string>
 
+    <!-- NavBarMenu -->
+    <string name="NavBarMenu_title_Library">Library</string>
+    <string name="NavBarMenu_title_Home">Home</string>
+    <string name="NavBarMenu_title_AddNewBook">Add book</string>
+
 
 </resources>
