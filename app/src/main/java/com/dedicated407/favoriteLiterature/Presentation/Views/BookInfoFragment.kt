@@ -1,5 +1,6 @@
 package com.dedicated407.favoriteLiterature.Presentation.Views
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -7,27 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.dedicated407.favoriteLiterature.Presentation.ViewModels.BookInfoViewModel
 import com.dedicated407.favoriteLiterature.databinding.BookInfoFragmentBinding
 import java.lang.Exception
 
 class BookInfoFragment : Fragment() {
-    private var mViewModel: BookInfoViewModel? = null
+    private val mViewModel: BookInfoViewModel by viewModels()
     private var mBinding: BookInfoFragmentBinding? = null
-    private lateinit var id: String
-    companion object {
-        public const val BOOK_ID_ARG: String = "currentBook"
-    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        id = arguments?.getString(BOOK_ID_ARG)!!
-
-        mViewModel = ViewModelProvider(this)[BookInfoViewModel::class.java]
-    }
+    private val args: BookInfoFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,11 +27,7 @@ class BookInfoFragment : Fragment() {
     ): View {
         mBinding = BookInfoFragmentBinding.inflate(layoutInflater, container, false)
 
-        mBinding?.bookInfoBack?.setOnClickListener{ v ->
-            Navigation.findNavController(v).popBackStack()
-        }
-
-        mViewModel?.getBook(id)?.observe(viewLifecycleOwner) { book ->
+        mViewModel.getBook(args.bookId).observe(viewLifecycleOwner) { book ->
             try {
                 mBinding!!.bookInfoImage.setImageBitmap(
                     BitmapFactory.decodeFileDescriptor(
@@ -55,6 +42,20 @@ class BookInfoFragment : Fragment() {
             mBinding!!.bookInfoName.text = book.name
             mBinding!!.bookInfoAuthor.text = book.author.toString()
             mBinding!!.bookInfoDescription.text = book.description
+
+            mBinding?.bookInfoShare?.setOnClickListener{
+                val sendIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, "app://fav.lit.ru/book/" + book.id)
+                    type = "text/plain"
+                }
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
+            }
+        }
+
+        mBinding?.bookInfoBack?.setOnClickListener{ v ->
+            Navigation.findNavController(v).popBackStack()
         }
 
         return mBinding!!.root
@@ -63,6 +64,5 @@ class BookInfoFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         mBinding = null
-        mViewModel = null
     }
 }

@@ -39,6 +39,13 @@
         android:id="@+id/book_info_fragment"
         android:name="com.dedicated407.favoriteLiterature.Presentation.Views.BookInfoFragment"
         android:label="book_info_fragment"
-        tools:layout="@layout/book_info_fragment"/>
+        tools:layout="@layout/book_info_fragment">
+        <argument
+            android:name="book_id"
+            app:argType="string" />
+        <deepLink
+            android:id="@+id/book_link"
+            app:uri="app://fav.lit.ru/book/{book_id}" />
+    </fragment>
 
 </navigation>
