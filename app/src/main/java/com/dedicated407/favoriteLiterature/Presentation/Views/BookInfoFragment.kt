@@ -26,32 +26,34 @@ class BookInfoFragment : Fragment() {
     ): View {
         mBinding = BookInfoFragmentBinding.inflate(layoutInflater, container, false)
 
-        mViewModel.getBook(args.bookId).observe(viewLifecycleOwner) { book ->
-            try {
-                mBinding!!.bookInfoImage.setImageBitmap(
-                    BitmapFactory.decodeFileDescriptor(
-                        mBinding!!.bookInfoImage.context.contentResolver.openFileDescriptor(
-                            Uri.parse(book.images?.get(0)), "r"
-                        )?.fileDescriptor
+        mViewModel.getBook(args.bookId).observe(viewLifecycleOwner, { it ->
+            it?.let { book ->
+                try {
+                    mBinding!!.bookInfoImage.setImageBitmap(
+                        BitmapFactory.decodeFileDescriptor(
+                            mBinding!!.bookInfoImage.context.contentResolver.openFileDescriptor(
+                                Uri.parse(book.images?.get(0)), "r"
+                            )?.fileDescriptor
+                        )
                     )
-                )
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            mBinding!!.bookInfoName.text = book.name
-            mBinding!!.bookInfoAuthor.text = book.author.toString()
-            mBinding!!.bookInfoDescription.text = book.description
-
-            mBinding?.bookInfoShare?.setOnClickListener{
-                val sendIntent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, "https://favlit.ru/book/" + book.id)
-                    type = "text/plain"
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
-                val shareIntent = Intent.createChooser(sendIntent, null)
-                startActivity(shareIntent)
-            }
-        }
+                mBinding!!.bookInfoName.text = book.name
+                mBinding!!.bookInfoAuthor.text = book.author.toString()
+                mBinding!!.bookInfoDescription.text = book.description
+
+                mBinding?.bookInfoShare?.setOnClickListener {
+                    val sendIntent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, "https://favlit.ru/book/" + book.id)
+                        type = "text/plain"
+                    }
+                    val shareIntent = Intent.createChooser(sendIntent, null)
+                    startActivity(shareIntent)
+                }
+            } ?: activity?.onBackPressed()
+        })
 
         return mBinding!!.root
     }
