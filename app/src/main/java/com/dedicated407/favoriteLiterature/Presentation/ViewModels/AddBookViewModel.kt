@@ -1,18 +1,22 @@
 package com.dedicated407.favoriteLiterature.Presentation.ViewModels
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dedicated407.favoriteLiterature.Domain.Model.Book
-import com.dedicated407.favoriteLiterature.Domain.Model.User
 import com.dedicated407.favoriteLiterature.Presentation.Room.Model.BookDTO
 import com.dedicated407.favoriteLiterature.Presentation.Repository.Repository
 
 class AddBookViewModel : ViewModel() {
-    fun addBook(name: String, author: User, description: String?) {
+    private val mImage = MutableLiveData<String?>()
+    val image: LiveData<String?>
+        get() = mImage
 
-        val book = BookDTO(Book(name, author))
-        if (description != null)
-            book.description = description
-
+    fun addBook(book: BookDTO) {
         Repository.getRepository().addBook(book)
     }
+
+    fun setImage(image: String?) {
+        mImage.value = image
+    }
+
 }

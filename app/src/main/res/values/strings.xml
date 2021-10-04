@@ -1,16 +1,26 @@
 <resources>
     <string name="app_name">Favorite Literature</string>
 
-    <!-- MainMenuFragment -->
-    <string name="MainMenuFragment_TextView_title_MainMenu">Main menu</string>
-    <string name="MainMenuFragment_Button_text_AddAuthor">Add author</string>
-
     <!-- AddBookFragment -->
     <string name="AddBookFragment_TextView_title_AddNewBook">Add new book</string>
     <string name="AddBookFragment_EditText_hint_BookName">Book name</string>
     <string name="AddBookFragment_EditText_hint_AuthorName">Author</string>
     <string name="AddBookFragment_EditText_hint_BookDescription">A brief description of your book</string>
+    <string name="AddBookFragment_Button_text_UploadImage">Upload image</string>
     <string name="AddBookFragment_Button_text_AddBook">Add book</string>
-    <string name="AddBookFragment_Button_text_AllBooks">All books</string>
+    <string name="AddBookFragment_ImageView_image_ImageBook">Image book</string>
+
+    <!-- BookInfoFragment -->
+    <string name="BookInfoFragment_TextView_title_BookInfo">___</string>
+    <string name="BookInfoFragment_TextView_label_BookName">Book name:</string>
+    <string name="BookInfoFragment_TextView_label_AuthorName">Author:</string>
+    <string name="BookInfoFragment_TextView_label_DescriptionBook">Description:</string>
+    <string name="BookInfoFragment_ImageView_image_ImageBook">Image book</string>
+    <string name="BookInfoFragment_Button_text_Share">Share</string>
+
+    <!-- NavBarMenu -->
+    <string name="NavBarMenu_title_Library">Library</string>
+    <string name="NavBarMenu_title_Home">Home</string>
+    <string name="NavBarMenu_title_AddNewBook">Add book</string>
 
 </resources>

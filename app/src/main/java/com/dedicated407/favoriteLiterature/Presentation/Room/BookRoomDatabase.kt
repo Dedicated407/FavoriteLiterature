@@ -12,7 +12,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-@Database(entities = [BookDTO::class], version = 1, exportSchema = false)
+@Database(entities = [BookDTO::class], version = 2, exportSchema = false)
  abstract class BookRoomDatabase : RoomDatabase() {
     abstract fun bookDao(): IBookDAO
 

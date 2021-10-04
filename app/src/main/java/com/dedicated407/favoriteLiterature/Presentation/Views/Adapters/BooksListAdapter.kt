@@ -1,13 +1,17 @@
 package com.dedicated407.favoriteLiterature.Presentation.Views.Adapters
 
+import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
-import android.view.View
 import androidx.annotation.NonNull
+import androidx.navigation.findNavController
 import com.dedicated407.favoriteLiterature.Domain.Model.Book
+import com.dedicated407.favoriteLiterature.Presentation.Views.BooksListFragmentDirections
 import com.dedicated407.favoriteLiterature.databinding.ListBooksItemFragmentBinding
 import org.jetbrains.annotations.NotNull
+import java.lang.Exception
 
 
 class BooksListAdapter(private var books: List<Book>) :
@@ -19,7 +23,7 @@ class BooksListAdapter(private var books: List<Book>) :
         @NonNull
         @NotNull
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): BookViewHolder {
         val binding: ListBooksItemFragmentBinding =
             ListBooksItemFragmentBinding.inflate(
@@ -32,8 +36,27 @@ class BooksListAdapter(private var books: List<Book>) :
 
     override fun onBindViewHolder(
         holder: BookViewHolder,
-        position: Int
+        position: Int,
     ) {
+
+        holder.binding.cardViewList.setOnClickListener { v ->
+            v.findNavController().navigate(
+                BooksListFragmentDirections.actionListBooksToBookInfo(books[position].id)
+            )
+        }
+
+        try {
+            holder.binding.bookImage.setImageBitmap(
+                BitmapFactory.decodeFileDescriptor(
+                    holder.binding.bookImage.context.contentResolver.openFileDescriptor(
+                        Uri.parse(books[position].images?.get(0)), "r"
+                    )?.fileDescriptor
+                )
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         holder.binding.itemBookName.text = books[position].name
         holder.binding.itemAuthorName.text = books[position].author.toString()
     }
