@@ -2,6 +2,7 @@ package com.dedicated407.favoriteLiterature
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.dedicated407.favoriteLiterature.Presentation.Repository.Repository
@@ -17,6 +18,9 @@ class MainActivity : AppCompatActivity() {
 
         mBinding = MainActivityBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
         Repository(application)
 
