@@ -28,6 +28,20 @@
     </fragment>
 
     <fragment
+        android:id="@+id/my_account_fragment"
+        android:name="com.dedicated407.favoriteLiterature.Presentation.Views.MyAccountFragment"
+        android:label="my_account_fragment"
+        tools:layout="@layout/my_account_fragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/find_author_fragment"
+        android:name="com.dedicated407.favoriteLiterature.Presentation.Views.FindAuthorFragment"
+        android:label="find_author_fragment"
+        tools:layout="@layout/find_author_fragment">
+    </fragment>
+
+    <fragment
         android:id="@+id/book_info_fragment"
         android:name="com.dedicated407.favoriteLiterature.Presentation.Views.BookInfoFragment"
         android:label="book_info_fragment"
@@ -38,13 +52,6 @@
         <deepLink
             android:id="@+id/book_link"
             app:uri="https://favlit.ru/book/{book_id}" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/my_account_fragment"
-        android:name="com.dedicated407.favoriteLiterature.Presentation.Views.MyAccountFragment"
-        android:label="my_account_fragment"
-        tools:layout="@layout/my_account_fragment">
     </fragment>
 
 </navigation>

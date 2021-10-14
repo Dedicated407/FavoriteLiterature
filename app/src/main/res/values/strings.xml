@@ -21,6 +21,7 @@
     <!-- NavBarMenu -->
     <string name="NavBarMenu_title_Library">Library</string>
     <string name="NavBarMenu_title_Home">Home</string>
+    <string name="NavBarMenu_title_FindAuthor">Find author</string>
     <string name="NavBarMenu_title_AddNewBook">Add book</string>
 
 </resources>
