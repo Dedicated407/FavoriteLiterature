@@ -36,9 +36,9 @@
 
     <fragment
         android:id="@+id/find_author_fragment"
-        android:name="com.dedicated407.favoriteLiterature.Presentation.Views.FindAuthorFragment"
+        android:name="com.dedicated407.favoriteLiterature.Presentation.Views.FindWriterFragment"
         android:label="find_author_fragment"
-        tools:layout="@layout/find_author_fragment">
+        tools:layout="@layout/find_writer_fragment">
     </fragment>
 
     <fragment
