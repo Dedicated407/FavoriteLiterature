@@ -23,6 +23,7 @@
                 android:layout_height="50dp"
                 android:gravity="center"
                 android:text="@string/AddBookFragment_TextView_title_AddNewBook"
+                android:textColor="@color/white"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"  />
 
             <EditText
@@ -31,6 +32,7 @@
                 android:layout_height="50dp"
                 android:hint="@string/AddBookFragment_EditText_hint_BookName"
                 android:inputType="text"
+                android:textColor="@color/white"
                 android:autofillHints="Book name" />
 
             <EditText
@@ -39,6 +41,7 @@
                 android:layout_height="50dp"
                 android:hint="@string/AddBookFragment_EditText_hint_AuthorName"
                 android:inputType="text"
+                android:textColor="@color/white"
                 android:autofillHints="Author" />
 
             <EditText
@@ -47,6 +50,7 @@
                 android:layout_height="50dp"
                 android:hint="@string/AddBookFragment_EditText_hint_BookDescription"
                 android:inputType="textMultiLine"
+                android:textColor="@color/white"
                 android:lines="3"
                 android:minLines="1"
                 android:maxLines="10"
@@ -68,6 +72,7 @@
                 android:id="@+id/btn_upload_image"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:backgroundTint="@color/light_bluish_green"
                 android:text="@string/AddBookFragment_Button_text_UploadImage" />
 
             <ImageView
@@ -85,7 +90,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/linear_upload_image"
             android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/normalMargin"
+            android:layout_marginStart="@dimen/normalMargin"
+            android:layout_marginTop="@dimen/normalMargin"
+            android:layout_marginEnd="@dimen/normalMargin"
+            android:layout_marginBottom="@dimen/normalMargin"
+            android:backgroundTint="@color/light_bluish_green"
             android:text="@string/AddBookFragment_Button_text_AddBook"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 

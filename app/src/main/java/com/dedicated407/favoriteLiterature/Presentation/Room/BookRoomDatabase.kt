@@ -30,9 +30,7 @@ import java.util.concurrent.Executors
                             context.applicationContext,
                             BookRoomDatabase::class.java,
                             "FL_database"
-                        ).allowMainThreadQueries()
-                            .fallbackToDestructiveMigration()
-                            .build()
+                        ).build()
                     }
                 }
             }

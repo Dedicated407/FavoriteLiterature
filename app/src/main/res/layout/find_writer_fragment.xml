@@ -8,19 +8,19 @@
         android:id="@+id/findWriter_SearchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@color/light_bluish_green"
         android:layout_margin="@dimen/normalMargin"
         android:iconifiedByDefault="false"
-        android:layout_centerHorizontal="true"
-        android:queryHint="@string/BookInfoFragment_SearchView_hint_SearchWriter"
         android:inputType="text"
-        android:background="@color/purple_200"/>
+        android:queryHint="@string/BookInfoFragment_SearchView_hint_SearchWriter" />
 
     <include
         android:id="@+id/FindWriter_List"
         layout="@layout/list_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/normalMargin"
-        android:layout_below="@+id/findWriter_SearchView"/>
+        android:layout_below="@+id/findWriter_SearchView"
+        android:layout_margin="@dimen/normalMargin"/>
 
 </RelativeLayout>

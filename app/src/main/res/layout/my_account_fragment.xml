@@ -17,7 +17,6 @@
             android:layout_height="wrap_content"
             android:lineSpacingExtra="8dp"
             android:text="User name:"
-            android:textColor="@color/black"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
         <TextView
@@ -28,7 +27,6 @@
             android:lineSpacingExtra="8dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="@color/black"
             android:text="Ilya Tsypin Pavlovich"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
