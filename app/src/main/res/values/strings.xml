@@ -26,4 +26,12 @@
     <!-- FindWriterFragment -->
     <string name="BookInfoFragment_SearchView_hint_SearchWriter">Search writer here</string>
 
+    <!-- AuthorizationFragment -->
+    <string name="AuthorizationFragment_TextView_title_Auth">Authorization</string>
+    <string name="AuthorizationFragment_EditText_hint_Login">Login</string>
+    <string name="AuthorizationFragment_EditText_hint_Password">Password</string>
+    <string name="AuthorizationFragment_Button_text_Auth">Log in</string>
+    <string name="AuthorizationFragment_TextView_label_OAuth2">You can also log in via:</string>
+    <string name="AuthorizationFragment_Button_text_LitRes">LitRes</string>
+    <string name="AuthorizationFragment_Button_text_VK">VK</string>
 </resources>

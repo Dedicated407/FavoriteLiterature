@@ -8,13 +8,16 @@ import androidx.room.RoomDatabase
 import androidx.room.Database
 import com.dedicated407.favoriteLiterature.Presentation.Room.Model.BookDTO
 import com.dedicated407.favoriteLiterature.Presentation.Room.DAO.IBookDAO
+import com.dedicated407.favoriteLiterature.Presentation.Room.DAO.IUserDAO
+import com.dedicated407.favoriteLiterature.Presentation.Room.Model.UserDTO
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-@Database(entities = [BookDTO::class], version = 2, exportSchema = false)
+@Database(entities = [BookDTO::class, UserDTO::class], version = 2, exportSchema = false)
  abstract class FavoriteLiteratureRoomDatabase : RoomDatabase() {
     abstract fun bookDao(): IBookDAO
+    abstract fun userDao(): IUserDAO
 
     companion object {
         private var INSTANCE: FavoriteLiteratureRoomDatabase? = null
