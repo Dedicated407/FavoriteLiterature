@@ -49,10 +49,13 @@ class AddBookFragment : Fragment() {
                 mViewModel.addBook(
                     BookDTO(
                         Book(
-                            name=mBinding.inputBookName.text.toString(),
-                            author=User(mBinding.inputAuthorName.text.toString(), ""),
-                            description=mBinding.inputBookDescription.text.toString(),
-                            images=images
+                            name = mBinding.inputBookName.text.toString(),
+                            author = User(
+                                name = mBinding.inputAuthorName.text.toString(),
+                                role = User.Role.Writer
+                            ),
+                            description = mBinding.inputBookDescription.text.toString(),
+                            images = images
                         )
                     )
                 )

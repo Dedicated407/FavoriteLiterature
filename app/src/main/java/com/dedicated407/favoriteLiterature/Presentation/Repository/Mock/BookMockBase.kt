@@ -3,61 +3,57 @@ package com.dedicated407.favoriteLiterature.Presentation.Repository.Mock
 import androidx.lifecycle.LiveData
 import com.dedicated407.favoriteLiterature.Domain.Model.Book
 import com.dedicated407.favoriteLiterature.Domain.Model.User
-import com.dedicated407.favoriteLiterature.Presentation.Repository.IRepositoryTasks
+import com.dedicated407.favoriteLiterature.Presentation.Repository.IBookRepository
 import androidx.lifecycle.MutableLiveData
 
 
-class MockBase : IRepositoryTasks {
+class BookMockBase : IBookRepository {
     private var data: MutableLiveData<List<Book>>
     private var list: ArrayList<Book> = arrayListOf()
 
     init {
         val book1 = Book(
-            "0",
-            "Kotlin",
-            User(
-                "Ilya",
-                "Tsypin",
-                "Pavlovich",
-                "+7 (800) 555-35-35",
-                "ilyaboy@list.ru"
+            name = "Kotlin",
+            author = User(
+                name = "Ilya",
+                lastName = "Tsypin",
+                patronymic = "Pavlovich",
+                phone = "+7 (800) 555-35-35",
+                email = "ilyaboy@list.ru"
             )
         )
         list.add(book1)
 
 
         val book2 = Book(
-            "1",
-            "The Bronze Horseman",
-            User(
-                "Alex",
-                "Pushkin",
-                "Sergeevich"
+            name = "The Bronze Horseman",
+            author = User(
+                name = "Alex",
+                lastName = "Pushkin",
+                patronymic = "Sergeevich"
             )
         )
         list.add(book2)
 
 
         val book3 = Book(
-            "2",
-            "War and Peace",
-            User(
-                "Lev",
-                "Tolstoy",
-                "Nikolaevich"
+            name = "War and Peace",
+            author = User(
+                name = "Lev",
+                lastName = "Tolstoy",
+                patronymic = "Nikolaevich"
             )
         )
         list.add(book3)
         
         val book4 = Book(
-            "3",
-            "Ward №6",
-            User(
-                "Anton",
-                "Chekhov",
-                "Pavlovich"
+            name = "Ward №6",
+            author = User(
+                name = "Anton",
+                lastName = "Chekhov",
+                patronymic = "Pavlovich"
             ),
-            "Ward №6. 1892. " +
+            description = "Ward №6. 1892. " +
                     "Summary of the story. " +
                     "It is read in 6 minutes, the original — 2 hours. " +
                     "In the county town, in a small hospital wing, " +

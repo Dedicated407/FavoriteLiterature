@@ -12,7 +12,7 @@ class AddBookViewModel : ViewModel() {
         get() = mImage
 
     fun addBook(book: BookDTO) {
-        Repository.getRepository().addBook(book)
+        Repository.getBookRepository().addBook(book)
     }
 
     fun setImage(image: String?) {

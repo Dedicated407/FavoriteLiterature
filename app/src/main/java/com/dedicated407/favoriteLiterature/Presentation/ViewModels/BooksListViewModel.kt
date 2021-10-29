@@ -7,10 +7,10 @@ import com.dedicated407.favoriteLiterature.Presentation.Repository.Repository
 
 class BooksListViewModel : ViewModel() {
     fun getBooksList(): LiveData<List<Book>> {
-        return Repository.getRepository().getAllBooks()
+        return Repository.getBookRepository().getAllBooks()
     }
 
     fun deleteBook(book: Book) {
-        Repository.getRepository().deleteBook(book)
+        Repository.getBookRepository().deleteBook(book)
     }
 }
