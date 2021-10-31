@@ -2,6 +2,7 @@ package com.dedicated407.favoriteLiterature.Presentation.Room.Model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.dedicated407.favoriteLiterature.Domain.Model.Role
 import com.dedicated407.favoriteLiterature.Domain.Model.User
 import com.google.gson.Gson
 

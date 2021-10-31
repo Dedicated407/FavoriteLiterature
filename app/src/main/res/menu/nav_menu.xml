@@ -23,6 +23,7 @@
         android:id="@+id/add_book_fragment"
         android:icon="@drawable/ic_book"
         android:enabled="true"
+        android:visible="false"
         android:title="@string/NavBarMenu_title_AddNewBook"/>
 
 </menu>

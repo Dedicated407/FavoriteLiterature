@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts.OpenDocument
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dedicated407.favoriteLiterature.Domain.Model.Book
+import com.dedicated407.favoriteLiterature.Domain.Model.Role
 import com.dedicated407.favoriteLiterature.Domain.Model.User
 import com.dedicated407.favoriteLiterature.Presentation.ViewModels.AddBookViewModel
 import com.dedicated407.favoriteLiterature.databinding.AddBookFragmentBinding
@@ -50,7 +51,7 @@ class AddBookFragment : Fragment() {
                         name = mBinding.inputBookName.text.toString(),
                         author = User(
                             name = mBinding.inputAuthorName.text.toString(),
-                            role = User.Role.Writer
+                            role = Role.Writer
                         ),
                         description = mBinding.inputBookDescription.text.toString(),
                         images = images

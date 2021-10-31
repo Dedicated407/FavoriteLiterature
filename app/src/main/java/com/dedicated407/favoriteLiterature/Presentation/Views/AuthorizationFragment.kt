@@ -8,8 +8,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.dedicated407.favoriteLiterature.Domain.Model.Role
 import com.dedicated407.favoriteLiterature.MainActivity
 import com.dedicated407.favoriteLiterature.Presentation.ViewModels.AuthorizationViewModel
+import com.dedicated407.favoriteLiterature.R
 import com.dedicated407.favoriteLiterature.databinding.AuthorizationFragmentBinding
 
 class AuthorizationFragment : Fragment() {
@@ -32,10 +34,15 @@ class AuthorizationFragment : Fragment() {
                     mBinding.inputAuthPassword.text.toString()
                 ).observe(viewLifecycleOwner) { user ->
                         if (user != null) {
-                            (requireActivity() as MainActivity)
+                            val bottomNav = (requireActivity() as MainActivity)
                                 .binding
                                 .bottomNavigation
-                                .visibility = View.VISIBLE
+
+                            bottomNav.visibility = View.VISIBLE
+
+                            if (user.role != Role.User) {
+                                bottomNav.menu.findItem(R.id.add_book_fragment).isVisible = true
+                            }
 
                             view.findNavController().navigate(
                                 AuthorizationFragmentDirections.actionAuthToMyAcc()

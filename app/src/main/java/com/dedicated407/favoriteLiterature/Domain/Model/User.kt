@@ -18,12 +18,4 @@ open class User(
     override fun toString(): String {
         return "$lastName $name $patronymic"
     }
-
-    enum class Role {
-        User,
-        Writer,
-        Editor,
-        Moderator,
-        Admin
-    }
 }
