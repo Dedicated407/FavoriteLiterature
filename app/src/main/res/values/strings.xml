@@ -31,7 +31,5 @@
     <string name="AuthorizationFragment_EditText_hint_Login">Login</string>
     <string name="AuthorizationFragment_EditText_hint_Password">Password</string>
     <string name="AuthorizationFragment_Button_text_Auth">Log in</string>
-    <string name="AuthorizationFragment_TextView_label_OAuth2">You can also log in via:</string>
-    <string name="AuthorizationFragment_Button_text_LitRes">LitRes</string>
-    <string name="AuthorizationFragment_Button_text_VK">VK</string>
+    <string name="AuthorizationFragment_Button_text_GoogleAuth">Google log in</string>
 </resources>

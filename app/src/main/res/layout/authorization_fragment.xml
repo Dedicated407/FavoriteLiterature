@@ -55,38 +55,12 @@
             android:layout_margin="@dimen/bigMargin"
             android:backgroundTint="@color/light_bluish_green" />
 
-
-        <TextView
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/btn_auth_GoogleBooks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@string/AuthorizationFragment_TextView_label_OAuth2"
-            android:textSize="14sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/normalMargin"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <Button
-                android:id="@+id/btn_auth_LitRes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/AuthorizationFragment_Button_text_LitRes"
-                android:layout_margin="@dimen/halfMargin"
-                android:backgroundTint="@color/light_bluish_green" />
-
-            <Button
-                android:id="@+id/btn_auth_VK"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/halfMargin"
-                android:text="@string/AuthorizationFragment_Button_text_VK"
-                android:backgroundTint="@color/light_bluish_green" />
-
-        </LinearLayout>
+            android:layout_gravity="start"
+            android:text="@string/AuthorizationFragment_Button_text_GoogleAuth" />
 
     </LinearLayout>
 
