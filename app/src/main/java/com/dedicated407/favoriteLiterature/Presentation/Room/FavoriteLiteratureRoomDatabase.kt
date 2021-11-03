@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-@Database(entities = [BookDTO::class, UserDTO::class], version = 2, exportSchema = false)
+@Database(entities = [BookDTO::class, UserDTO::class], version = 1, exportSchema = false)
  abstract class FavoriteLiteratureRoomDatabase : RoomDatabase() {
     abstract fun bookDao(): IBookDAO
     abstract fun userDao(): IUserDAO

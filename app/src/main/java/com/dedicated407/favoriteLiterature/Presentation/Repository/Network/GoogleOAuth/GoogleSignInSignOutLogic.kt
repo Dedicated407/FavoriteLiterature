@@ -7,7 +7,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
-class GoogleSignInLogic {
+class GoogleSignInSignOutLogic {
     private lateinit var mGoogleSignInClient: GoogleSignInClient
 
     fun buildGoogleClient(activity: Activity) : Intent {
@@ -19,6 +19,8 @@ class GoogleSignInLogic {
         mGoogleSignInClient = GoogleSignIn.getClient(activity, gso)
         return mGoogleSignInClient.signInIntent
     }
+
+    fun signOut() = mGoogleSignInClient.signOut()
 
     fun handleSignInResult(result: Intent)
             = handleSignIn(GoogleSignIn.getSignedInAccountFromIntent(result))

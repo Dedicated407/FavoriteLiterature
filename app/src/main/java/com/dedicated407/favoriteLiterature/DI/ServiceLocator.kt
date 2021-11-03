@@ -1,16 +1,21 @@
 package com.dedicated407.favoriteLiterature.DI
 
+import com.dedicated407.favoriteLiterature.Presentation.Repository.Network.GoogleOAuth.GoogleSignInSignOutLogic
 import com.dedicated407.favoriteLiterature.Presentation.Repository.Network.WriterAnalysis
 
 class ServiceLocator {
-    private var instance: ServiceLocator? = null
     private var mAnalysis: WriterAnalysis? = null
+    private var mGoogleSignInSignOutLogic: GoogleSignInSignOutLogic? = null
 
-    fun getInstance(): ServiceLocator {
-        if (instance == null) {
-            instance = ServiceLocator()
+    companion object {
+        private var instance: ServiceLocator? = null
+
+        fun getInstance(): ServiceLocator {
+            if (instance == null) {
+                instance = ServiceLocator()
+            }
+            return instance!!
         }
-        return instance!!
     }
 
     fun getAnalysis(): WriterAnalysis {
@@ -18,5 +23,12 @@ class ServiceLocator {
             mAnalysis = WriterAnalysis()
         }
         return mAnalysis!!
+    }
+
+    fun getGoogleSignIn(): GoogleSignInSignOutLogic {
+        if (mGoogleSignInSignOutLogic == null) {
+            mGoogleSignInSignOutLogic = GoogleSignInSignOutLogic()
+        }
+        return mGoogleSignInSignOutLogic!!
     }
 }

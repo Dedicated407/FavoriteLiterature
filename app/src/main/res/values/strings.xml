@@ -32,4 +32,10 @@
     <string name="AuthorizationFragment_EditText_hint_Password">Password</string>
     <string name="AuthorizationFragment_Button_text_Auth">Log in</string>
     <string name="AuthorizationFragment_Button_text_GoogleAuth">Google log in</string>
+
+    <!-- MyAccountFragment -->
+    <string name="MyAccountFragment_EditText_label_UserName">Name:</string>
+    <string name="MyAccountFragment_EditText_hint_UserName">Enter your name</string>
+    <string name="MyAccountFragment_Button_text_LogOut">log out</string>
+
 </resources>
