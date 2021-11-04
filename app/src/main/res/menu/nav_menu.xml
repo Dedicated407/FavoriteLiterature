@@ -14,9 +14,16 @@
         android:title="@string/NavBarMenu_title_Home"/>
 
     <item
+        android:id="@+id/find_author_fragment"
+        android:icon="@drawable/ic_find_author"
+        android:enabled="true"
+        android:title="@string/NavBarMenu_title_FindWriter"/>
+
+    <item
         android:id="@+id/add_book_fragment"
         android:icon="@drawable/ic_book"
         android:enabled="true"
+        android:visible="false"
         android:title="@string/NavBarMenu_title_AddNewBook"/>
 
 </menu>

@@ -25,7 +25,7 @@ class BooksListFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         mBinding = ListFragmentBinding.inflate(layoutInflater, container, false)
-        mBinding.list.layoutManager = LinearLayoutManager(context)
+        mBinding.RecyclerViewList.layoutManager = LinearLayoutManager(context)
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             override fun onMove(
@@ -38,13 +38,13 @@ class BooksListFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                mViewModel.deleteBook((mBinding.list.adapter as BooksListAdapter).getData()[position])
+                mViewModel.deleteBook((mBinding.RecyclerViewList.adapter as BooksListAdapter).getData()[position])
             }
-        }).attachToRecyclerView(mBinding.list)
+        }).attachToRecyclerView(mBinding.RecyclerViewList)
 
         mViewModel = ViewModelProvider(this).get(BooksListViewModel::class.java)
         mViewModel.getBooksList().observe(viewLifecycleOwner) { bookList: List<Book> ->
-            mBinding.list.adapter = BooksListAdapter(bookList)
+            mBinding.RecyclerViewList.adapter = BooksListAdapter(bookList)
         }
 
         return mBinding.root

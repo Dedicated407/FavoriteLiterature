@@ -7,6 +7,7 @@
     tools:context=".Presentation.Views.MyAccountFragment">
 
     <LinearLayout
+        android:id="@+id/linearLayout_userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bigMargin"
@@ -15,22 +16,29 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:lineSpacingExtra="8dp"
-            android:text="User name:"
-            android:textColor="@color/black"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            android:text="@string/MyAccountFragment_EditText_label_UserName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
-            android:id="@+id/username"
-            android:layout_width="match_parent"
+            android:id="@+id/myAcc_userName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/halfMargin"
-            android:lineSpacingExtra="8dp"
             android:ellipsize="end"
+            android:hint="@string/MyAccountFragment_EditText_hint_UserName"
+            android:text="Tsypin Ilya"
             android:maxLines="1"
-            android:textColor="@color/black"
-            android:text="Ilya Tsypin Pavlovich"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_logOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/MyAccountFragment_Button_text_LogOut"
+        android:layout_margin="@dimen/bigMargin"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/light_bluish_green" />
+
 </RelativeLayout>

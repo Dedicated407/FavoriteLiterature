@@ -1,26 +1,47 @@
 package com.dedicated407.favoriteLiterature.Presentation.Repository
 
 import android.app.Application
-import com.dedicated407.favoriteLiterature.Presentation.Repository.Mock.MockBase
+import com.dedicated407.favoriteLiterature.Presentation.Repository.Mock.BookMockBase
+import com.dedicated407.favoriteLiterature.Presentation.Repository.Mock.UserMockBase
 import com.dedicated407.favoriteLiterature.Presentation.Room.BookRepository
+import com.dedicated407.favoriteLiterature.Presentation.Room.FavoriteLiteratureRoomDatabase
+import com.dedicated407.favoriteLiterature.Presentation.Room.UserRepository
 
 
 class Repository(application: Application) {
 
     init {
-        if (IRepository == null) {
-            IRepository = BookRepository(application)
+        if (bookRepository == null) {
+            bookRepository = BookRepository(
+                FavoriteLiteratureRoomDatabase.getDatabase(
+                application.applicationContext
+            ))
+        }
+
+        if (userRepository == null) {
+            userRepository = UserRepository(
+                FavoriteLiteratureRoomDatabase.getDatabase(
+                    application.applicationContext
+                ))
         }
     }
 
     companion object{
-        private var IRepository: IRepositoryTasks? = null
+        private var bookRepository: IBookRepository? = null
+        private var userRepository: IUserRepository? = null
 
-        fun getRepository(): IRepositoryTasks{
-            if (IRepository == null) {
-                IRepository = MockBase()
+        fun getBookRepository(): IBookRepository {
+            if (bookRepository == null) {
+                bookRepository = BookMockBase()
             }
-            return IRepository as IRepositoryTasks
+            return bookRepository as IBookRepository
+        }
+
+        fun getUserRepository(): IUserRepository {
+            if (userRepository == null) {
+                userRepository = UserMockBase()
+            }
+            return userRepository as IUserRepository
         }
     }
 }

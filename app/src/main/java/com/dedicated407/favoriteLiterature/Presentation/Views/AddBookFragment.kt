@@ -12,8 +12,8 @@ import androidx.activity.result.contract.ActivityResultContracts.OpenDocument
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dedicated407.favoriteLiterature.Domain.Model.Book
+import com.dedicated407.favoriteLiterature.Domain.Model.Role
 import com.dedicated407.favoriteLiterature.Domain.Model.User
-import com.dedicated407.favoriteLiterature.Presentation.Room.Model.BookDTO
 import com.dedicated407.favoriteLiterature.Presentation.ViewModels.AddBookViewModel
 import com.dedicated407.favoriteLiterature.databinding.AddBookFragmentBinding
 
@@ -47,13 +47,14 @@ class AddBookFragment : Fragment() {
         mBinding.btnAddBook.setOnClickListener { v ->
             if (mBinding.inputBookName.text.toString().isNotEmpty() && images.size != 0) {
                 mViewModel.addBook(
-                    BookDTO(
-                        Book(
-                            name=mBinding.inputBookName.text.toString(),
-                            author=User(mBinding.inputAuthorName.text.toString(), ""),
-                            description=mBinding.inputBookDescription.text.toString(),
-                            images=images
-                        )
+                    Book(
+                        name = mBinding.inputBookName.text.toString(),
+                        author = User(
+                            name = mBinding.inputAuthorName.text.toString(),
+                            role = Role.Writer
+                        ),
+                        description = mBinding.inputBookDescription.text.toString(),
+                        images = images
                     )
                 )
                 Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()

@@ -11,7 +11,6 @@
     <string name="AddBookFragment_ImageView_image_ImageBook">Image book</string>
 
     <!-- BookInfoFragment -->
-    <string name="BookInfoFragment_TextView_title_BookInfo">___</string>
     <string name="BookInfoFragment_TextView_label_BookName">Book name:</string>
     <string name="BookInfoFragment_TextView_label_AuthorName">Author:</string>
     <string name="BookInfoFragment_TextView_label_DescriptionBook">Description:</string>
@@ -21,6 +20,22 @@
     <!-- NavBarMenu -->
     <string name="NavBarMenu_title_Library">Library</string>
     <string name="NavBarMenu_title_Home">Home</string>
+    <string name="NavBarMenu_title_FindWriter">Find writer</string>
     <string name="NavBarMenu_title_AddNewBook">Add book</string>
+
+    <!-- FindWriterFragment -->
+    <string name="BookInfoFragment_SearchView_hint_SearchWriter">Search writer here</string>
+
+    <!-- AuthorizationFragment -->
+    <string name="AuthorizationFragment_TextView_title_Auth">Authorization</string>
+    <string name="AuthorizationFragment_EditText_hint_Login">Login</string>
+    <string name="AuthorizationFragment_EditText_hint_Password">Password</string>
+    <string name="AuthorizationFragment_Button_text_Auth">Log in</string>
+    <string name="AuthorizationFragment_Button_text_GoogleAuth">Google log in</string>
+
+    <!-- MyAccountFragment -->
+    <string name="MyAccountFragment_EditText_label_UserName">Name:</string>
+    <string name="MyAccountFragment_EditText_hint_UserName">Enter your name</string>
+    <string name="MyAccountFragment_Button_text_LogOut">log out</string>
 
 </resources>

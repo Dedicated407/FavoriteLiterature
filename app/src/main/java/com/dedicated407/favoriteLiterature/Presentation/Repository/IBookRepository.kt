@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.dedicated407.favoriteLiterature.Domain.Model.Book
 
 
-interface IRepositoryTasks {
+interface IBookRepository {
     fun getAllBooks(): LiveData<List<Book>>
     fun <T: Book> addBook(book: T)
     fun getBook(id: String): LiveData<Book>
