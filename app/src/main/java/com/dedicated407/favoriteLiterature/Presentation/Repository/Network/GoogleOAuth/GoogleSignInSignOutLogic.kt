@@ -9,31 +9,41 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 class GoogleSignInSignOutLogic {
     private lateinit var mGoogleSignInClient: GoogleSignInClient
+    public val signInIntent: Intent
+    get() = mGoogleSignInClient.signInIntent
 
-    fun buildGoogleClient(activity: Activity) : Intent {
+    fun buildGoogleClient(activity: Activity) {
         val gso = GoogleSignInOptions
             .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
 
         mGoogleSignInClient = GoogleSignIn.getClient(activity, gso)
-        return mGoogleSignInClient.signInIntent
     }
 
     fun signOut() = mGoogleSignInClient.signOut()
+
+    fun getLastSignedInAcc(activity: Activity) = GoogleSignIn.getLastSignedInAccount(activity)
 
     fun handleSignInResult(result: Intent)
             = handleSignIn(GoogleSignIn.getSignedInAccountFromIntent(result))
 
     private fun handleSignIn(task: Task<GoogleSignInAccount>) = try {
         val account = task.getResult(ApiException::class.java)
-        arrayOf(
+        SignInResult(
             account.email!!,
             account.givenName!!,
             account.familyName!!
         )
     } catch (e: Throwable) {
         e.printStackTrace()
+        println(e.localizedMessage)
         null
     }
 }
+
+data class SignInResult(
+    val email: String,
+    val userName: String,
+    val userSurname: String
+)
