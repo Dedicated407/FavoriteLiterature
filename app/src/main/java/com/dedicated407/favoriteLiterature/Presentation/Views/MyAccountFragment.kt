@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.dedicated407.favoriteLiterature.MainActivity
 import com.dedicated407.favoriteLiterature.Presentation.ViewModels.MyAccountViewModel
+import com.dedicated407.favoriteLiterature.R
 import com.dedicated407.favoriteLiterature.databinding.MyAccountFragmentBinding
 
 class MyAccountFragment : Fragment() {
@@ -36,19 +36,20 @@ class MyAccountFragment : Fragment() {
         mBinding = MyAccountFragmentBinding.inflate(layoutInflater, container, false)
 
         mBinding.btnLogOut.setOnClickListener {
-            val signOutAcc = mViewModel.signOut(requireContext())
-            if (signOutAcc != null) {
-                signOutAcc.addOnCompleteListener {
-                    view?.findNavController()?.navigate(
-                        MyAccountFragmentDirections.actionMyAccToAuth()
-                    )
+            val isSignOut = mViewModel.signOut(requireContext())
 
-                    val bottomNav = (requireActivity() as MainActivity)
-                        .binding
-                        .bottomNavigation
+            if (isSignOut) {
+                val bottomNav = (requireActivity() as MainActivity)
+                    .binding
+                    .bottomNavigation
 
-                    bottomNav.visibility = View.GONE
-                }
+                bottomNav.menu.findItem(R.id.add_book_fragment).isVisible = false
+
+                bottomNav.visibility = View.GONE
+
+                findNavController().navigate(
+                    MyAccountFragmentDirections.actionMyAccToAuth()
+                )
             } else {
                 Toast.makeText(context, "You can`t sign out", Toast.LENGTH_SHORT).show()
             }

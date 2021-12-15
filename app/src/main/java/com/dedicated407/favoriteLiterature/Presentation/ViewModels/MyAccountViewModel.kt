@@ -3,12 +3,10 @@ package com.dedicated407.favoriteLiterature.Presentation.ViewModels
 import android.content.Context
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
-import com.dedicated407.favoriteLiterature.DI.ServiceLocator
-import com.google.android.gms.tasks.Task
 
 class MyAccountViewModel : ViewModel() {
 
-    fun signOut(context: Context): Task<Void>? {
+    fun signOut(context: Context): Boolean {
 
         val key = context.getSharedPreferences(
             "AuthKey",
@@ -20,9 +18,9 @@ class MyAccountViewModel : ViewModel() {
                 putString("Login", null)
             }
 
-            return ServiceLocator.getInstance().getGoogleSignIn().signOut()
+            return true
         }
-        return null
+        return false
     }
 
 

@@ -1,9 +1,9 @@
-package com.dedicated407.favoriteLiterature.Presentation.Repository;
+package com.dedicated407.favoriteLiterature.Presentation.Repository
 
-import androidx.lifecycle.LiveData
+import kotlinx.coroutines.flow.Flow
 import com.dedicated407.favoriteLiterature.Domain.Model.User
 
-public interface IUserRepository {
-    suspend fun <T : User> registerUser(user: T)
-    fun <T: User> loginUser(user: T): LiveData<User?>
+interface IUserRepository {
+    suspend fun getUser(login: String? = null, password: String? = null): Flow<User?>
+    fun saveUser(user: User)
 }
