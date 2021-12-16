@@ -3,6 +3,7 @@ package com.dedicated407.favoriteLiterature.Presentation.ViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dedicated407.favoriteLiterature.DI.ServiceLocator
 import com.dedicated407.favoriteLiterature.Presentation.Repository.Server.Models.AuthUserResponse
 import com.dedicated407.favoriteLiterature.Presentation.Repository.Server.ServerRepository.AuthUserRepository
 import kotlinx.coroutines.launch
@@ -19,6 +20,8 @@ class AuthorizationViewModel : ViewModel() {
                     it.userId,
                     it.role
                 )
+
+                ServiceLocator.getInstance().jwtToken = it.jwtToken
             }
         }
     }

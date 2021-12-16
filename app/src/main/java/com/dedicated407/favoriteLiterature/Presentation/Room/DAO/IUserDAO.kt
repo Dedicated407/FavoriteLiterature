@@ -14,4 +14,7 @@ interface IUserDAO {
 
     @Query("SELECT * FROM users WHERE login=(:login)")
     fun login(login: String): Flow<UserDTO>
+
+    @Query("SELECT * FROM users WHERE id = :id")
+    fun findUserById(id: String): Flow<UserDTO?>
 }

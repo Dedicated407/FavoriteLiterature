@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dedicated407.favoriteLiterature.Domain.Model.Book
+import com.dedicated407.favoriteLiterature.Presentation.Repository.Server.Models.BookListViewDTO
 import com.dedicated407.favoriteLiterature.Presentation.ViewModels.BooksListViewModel
 import com.dedicated407.favoriteLiterature.Presentation.Views.Adapters.BooksListAdapter
 import com.dedicated407.favoriteLiterature.databinding.ListFragmentBinding
@@ -36,14 +36,11 @@ class BooksListFragment : Fragment() {
                 return false
             }
 
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
-                mViewModel.deleteBook((mBinding.RecyclerViewList.adapter as BooksListAdapter).getData()[position])
-            }
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) { }
         }).attachToRecyclerView(mBinding.RecyclerViewList)
 
         mViewModel = ViewModelProvider(this).get(BooksListViewModel::class.java)
-        mViewModel.getBooksList().observe(viewLifecycleOwner) { bookList: List<Book> ->
+        mViewModel.getAllBooks().observe(viewLifecycleOwner) { bookList: List<BookListViewDTO> ->
             mBinding.RecyclerViewList.adapter = BooksListAdapter(bookList)
         }
 
