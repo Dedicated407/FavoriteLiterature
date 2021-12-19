@@ -5,6 +5,6 @@ import java.util.*
 class BookListViewDTO (
     var id: UUID,
     var name: String,
-    var authorId: String,
-    var images: List<String>
+    var authorName: String,
+    var images: MutableList<String>
 )

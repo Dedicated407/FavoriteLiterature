@@ -1,6 +1,5 @@
 package com.dedicated407.favoriteLiterature.Presentation.Views.Adapters
 
-import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
@@ -8,6 +7,7 @@ import android.view.LayoutInflater
 import androidx.annotation.NonNull
 import androidx.navigation.findNavController
 import com.dedicated407.favoriteLiterature.Presentation.Repository.Server.Models.BookListViewDTO
+import com.dedicated407.favoriteLiterature.Presentation.Repository.toBitmap
 import com.dedicated407.favoriteLiterature.Presentation.Views.BooksListFragmentDirections
 import com.dedicated407.favoriteLiterature.databinding.ListBooksItemFragmentBinding
 import org.jetbrains.annotations.NotNull
@@ -45,20 +45,22 @@ class BooksListAdapter(private var books: List<BookListViewDTO>) :
             )
         }
 
+        val book = books[position]
+
         try {
             holder.binding.bookImage.setImageBitmap(
-                BitmapFactory.decodeFileDescriptor(
-                    holder.binding.bookImage.context.contentResolver.openFileDescriptor(
-                        Uri.parse(books[position].images[0]), "r"
-                    )?.fileDescriptor
+                Uri.parse(book.images[0]).toBitmap(
+                    holder.itemView.context,
+                    holder.binding.bookImage.layoutParams.width,
+                    holder.binding.bookImage.layoutParams.height,
                 )
             )
         } catch (e: Exception) {
             e.printStackTrace()
         }
 
-        holder.binding.itemBookName.text = books[position].name
-        holder.binding.itemAuthorName.text = books[position].authorId
+        holder.binding.itemBookName.text = book.name
+        holder.binding.itemAuthorName.text = book.authorName
     }
 
     override fun getItemCount(): Int {

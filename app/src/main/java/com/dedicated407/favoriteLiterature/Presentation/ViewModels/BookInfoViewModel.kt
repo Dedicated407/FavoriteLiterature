@@ -1,8 +1,22 @@
 package com.dedicated407.favoriteLiterature.Presentation.ViewModels
 
-import androidx.lifecycle.ViewModel
-import com.dedicated407.favoriteLiterature.Presentation.Repository.Repository
+import androidx.lifecycle.*
+import com.dedicated407.favoriteLiterature.Domain.Model.Book
+import com.dedicated407.favoriteLiterature.Presentation.Repository.Server.ServerRepository.BookRepository
 
-class BookInfoViewModel : ViewModel() {
-    fun getBook(id: String) = Repository.getBookRepository().getBook(id)
+class BookInfoViewModel(
+    private val bookRepository: BookRepository
+) : ViewModel() {
+    private val mResponse: MutableLiveData<Book> = MutableLiveData()
+
+    fun getBook(id: String) =
+    liveData(viewModelScope.coroutineContext) {
+        val book = bookRepository.getBook(id)
+        book.images = mutableListOf(bookRepository.downloadImage(book.id))
+        mResponse.value = book
+
+        emitSource(
+            mResponse
+        )
+    }
 }

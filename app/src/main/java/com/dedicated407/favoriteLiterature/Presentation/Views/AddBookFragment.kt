@@ -49,10 +49,7 @@ class AddBookFragment : Fragment() {
                 mViewModel.addBook(
                     Book(
                         name = mBinding.inputBookName.text.toString(),
-                        author = User(
-                            name = mBinding.inputAuthorName.text.toString(),
-                            role = Role.Writer
-                        ),
+                        authorName = mBinding.inputAuthorName.text.toString(),
                         description = mBinding.inputBookDescription.text.toString(),
                         images = images
                     )
