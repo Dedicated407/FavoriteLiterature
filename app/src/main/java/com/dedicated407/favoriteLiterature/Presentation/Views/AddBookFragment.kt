@@ -10,10 +10,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts.OpenDocument
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.dedicated407.favoriteLiterature.Domain.Model.Book
-import com.dedicated407.favoriteLiterature.Domain.Model.Role
-import com.dedicated407.favoriteLiterature.Domain.Model.User
+import com.dedicated407.favoriteLiterature.Presentation.Repository.ImageLoader
+import com.dedicated407.favoriteLiterature.Presentation.Repository.Server.ServerRepository.BookRepository
 import com.dedicated407.favoriteLiterature.Presentation.ViewModels.AddBookViewModel
 import com.dedicated407.favoriteLiterature.databinding.AddBookFragmentBinding
 
@@ -28,10 +27,11 @@ class AddBookFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         mBinding = AddBookFragmentBinding.inflate(layoutInflater, container, false)
+        mViewModel = AddBookViewModel(BookRepository(ImageLoader(requireContext())))
 
         mBinding.btnUploadImage.setOnClickListener {
-            requireActivity().activityResultRegistry.register("registerImage", OpenDocument())
-            { result ->
+            requireActivity().activityResultRegistry.register("registerImage", OpenDocument()) {
+                    result ->
                 if (result != null) {
                     requireActivity().applicationContext.contentResolver
                         .takePersistableUriPermission(
@@ -44,7 +44,7 @@ class AddBookFragment : Fragment() {
             }.launch(arrayOf("image/*"))
         }
 
-        mBinding.btnAddBook.setOnClickListener { v ->
+        mBinding.btnAddBook.setOnClickListener {
             if (mBinding.inputBookName.text.toString().isNotEmpty() && images.size != 0) {
                 mViewModel.addBook(
                     Book(
@@ -53,29 +53,29 @@ class AddBookFragment : Fragment() {
                         description = mBinding.inputBookDescription.text.toString(),
                         images = images
                     )
-                )
-                Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
+                ).invokeOnCompletion {
+                    Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
 
-                mBinding.apply {
-                    bookImage.visibility = View.GONE
-                    images.clear()
-                    inputBookName.text = null
-                    inputAuthorName.text = null
-                    inputBookDescription.text = null
+                    mBinding.apply {
+                        bookImage.visibility = View.GONE
+                        images.clear()
+                        inputBookName.text = null
+                        inputAuthorName.text = null
+                        inputBookDescription.text = null
+                    }
                 }
             } else {
                 Toast.makeText(context, "You have not entered all the data", Toast.LENGTH_SHORT).show()
             }
         }
 
-        mViewModel = ViewModelProvider(this)[AddBookViewModel::class.java]
-
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mViewModel = ViewModelProvider(this).get(AddBookViewModel::class.java)
+        mViewModel = AddBookViewModel(BookRepository(ImageLoader(requireContext())))
+
         mViewModel.image.observe(viewLifecycleOwner, {
             if (it == null) {
                 mBinding.bookImage.setImageDrawable(null)

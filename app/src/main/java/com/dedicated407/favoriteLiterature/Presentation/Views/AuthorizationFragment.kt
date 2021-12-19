@@ -39,15 +39,15 @@ class AuthorizationFragment : Fragment() {
                     password
                 )
                 response.observe(viewLifecycleOwner, {
-                    if (it != null) {
+                    try {
                         requireContext()
                             .getSharedPreferences("AuthKey", Context.MODE_PRIVATE).edit {
                                 putString("Login", login)
                             }
 
                         bottomNavShow(it)
-                    } else {
-                        Toast.makeText(context, "Incorrect data!", Toast.LENGTH_SHORT).show()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 })
             } else {

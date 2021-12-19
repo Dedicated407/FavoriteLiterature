@@ -10,13 +10,13 @@ class BookInfoViewModel(
     private val mResponse: MutableLiveData<Book> = MutableLiveData()
 
     fun getBook(id: String) =
-    liveData(viewModelScope.coroutineContext) {
-        val book = bookRepository.getBook(id)
-        book.images = mutableListOf(bookRepository.downloadImage(book.id))
-        mResponse.value = book
+        liveData(viewModelScope.coroutineContext) {
+            val book = bookRepository.getBook(id)
+            book.images = mutableListOf(bookRepository.downloadImage(book.id))
+            mResponse.value = book
 
-        emitSource(
-            mResponse
-        )
+            emitSource(
+                mResponse
+            )
     }
 }
