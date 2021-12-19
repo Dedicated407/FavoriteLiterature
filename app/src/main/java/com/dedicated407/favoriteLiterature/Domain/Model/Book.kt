@@ -5,7 +5,7 @@ import java.util.*
 open class Book(
     open val id: String = UUID.randomUUID().toString(),
     open val name: String? = null,
-    open val author: User? = null,
+    open val authorName: String? = null,
     open val description: String? = null,
-    open val images: List<String>? = null
+    open var images: List<String>? = null
 )

@@ -1,20 +1,20 @@
 package com.dedicated407.favoriteLiterature.Presentation.Views.Adapters
 
-import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.annotation.NonNull
 import androidx.navigation.findNavController
-import com.dedicated407.favoriteLiterature.Domain.Model.Book
+import com.dedicated407.favoriteLiterature.Presentation.Repository.Server.Models.BookListViewDTO
+import com.dedicated407.favoriteLiterature.Presentation.Repository.toBitmap
 import com.dedicated407.favoriteLiterature.Presentation.Views.BooksListFragmentDirections
 import com.dedicated407.favoriteLiterature.databinding.ListBooksItemFragmentBinding
 import org.jetbrains.annotations.NotNull
 import java.lang.Exception
 
 
-class BooksListAdapter(private var books: List<Book>) :
+class BooksListAdapter(private var books: List<BookListViewDTO>) :
     RecyclerView.Adapter<BooksListAdapter.BookViewHolder>() {
 
     @NonNull
@@ -41,34 +41,36 @@ class BooksListAdapter(private var books: List<Book>) :
 
         holder.binding.cardViewList.setOnClickListener { v ->
             v.findNavController().navigate(
-                BooksListFragmentDirections.actionListBooksToBookInfo(books[position].id)
+                BooksListFragmentDirections.actionListBooksToBookInfo(books[position].id.toString())
             )
         }
 
+        val book = books[position]
+
         try {
             holder.binding.bookImage.setImageBitmap(
-                BitmapFactory.decodeFileDescriptor(
-                    holder.binding.bookImage.context.contentResolver.openFileDescriptor(
-                        Uri.parse(books[position].images?.get(0)), "r"
-                    )?.fileDescriptor
+                Uri.parse(book.images[0]).toBitmap(
+                    holder.itemView.context,
+                    holder.binding.bookImage.layoutParams.width,
+                    holder.binding.bookImage.layoutParams.height,
                 )
             )
         } catch (e: Exception) {
             e.printStackTrace()
         }
 
-        holder.binding.itemBookName.text = books[position].name
-        holder.binding.itemAuthorName.text = books[position].author.toString()
+        holder.binding.itemBookName.text = book.name
+        holder.binding.itemAuthorName.text = book.authorName
     }
 
     override fun getItemCount(): Int {
         return books.size
     }
 
-    fun getData(): List<Book> {
+    fun getData(): List<BookListViewDTO> {
         return books
     }
 
     class BookViewHolder(var binding: ListBooksItemFragmentBinding) :
-        RecyclerView.ViewHolder(binding.root) { }
+        RecyclerView.ViewHolder(binding.root)
 }

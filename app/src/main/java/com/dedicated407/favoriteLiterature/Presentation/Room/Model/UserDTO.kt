@@ -8,9 +8,10 @@ import com.google.gson.Gson
 
 @Entity(tableName = "users", ignoredColumns = ["images"])
 data class UserDTO(
-    @PrimaryKey override val id: String,
-    override val login: String?,
-    override val password: String?,
+    @PrimaryKey override var id: String,
+    override var login: String?,
+    override var password: String?,
+    override var jwtToken: String?,
     override var name: String?,
     override var lastName: String?,
     override var patronymic: String?,
@@ -24,6 +25,7 @@ data class UserDTO(
         user.id,
         user.login,
         user.password,
+        user.jwtToken,
         user.name,
         user.lastName,
         user.patronymic,

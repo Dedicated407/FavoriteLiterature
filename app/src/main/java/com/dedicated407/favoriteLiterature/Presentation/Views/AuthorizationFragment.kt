@@ -1,28 +1,18 @@
 package com.dedicated407.favoriteLiterature.Presentation.Views
 
 import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.ActivityResultRegistry
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.edit
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.dedicated407.favoriteLiterature.DI.ServiceLocator
+import androidx.navigation.fragment.findNavController
 import com.dedicated407.favoriteLiterature.Domain.Model.Role
-import com.dedicated407.favoriteLiterature.Domain.Model.User
 import com.dedicated407.favoriteLiterature.MainActivity
-import com.dedicated407.favoriteLiterature.Presentation.Repository.Network.GoogleOAuth.GoogleSignInSignOutLogic
+import com.dedicated407.favoriteLiterature.Presentation.Repository.Server.Models.AuthUserResponse
 import com.dedicated407.favoriteLiterature.Presentation.ViewModels.AuthorizationViewModel
 import com.dedicated407.favoriteLiterature.R
 import com.dedicated407.favoriteLiterature.databinding.AuthorizationFragmentBinding
@@ -30,25 +20,6 @@ import com.dedicated407.favoriteLiterature.databinding.AuthorizationFragmentBind
 class AuthorizationFragment : Fragment() {
     private lateinit var mViewModel: AuthorizationViewModel
     private lateinit var mBinding: AuthorizationFragmentBinding
-    private lateinit var mGoogleLauncher: GoogleLauncher
-    private lateinit var mSignInIntent: Intent
-    private lateinit var mSharedPreferences: SharedPreferences
-    private var mGoogleSignInLogic: GoogleSignInSignOutLogic = ServiceLocator.getInstance().getGoogleSignIn()
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        mSharedPreferences = requireContext().getSharedPreferences("AuthKey", Context.MODE_PRIVATE)
-
-        mSignInIntent = mGoogleSignInLogic.buildGoogleClient(requireActivity())
-
-        mGoogleLauncher = GoogleLauncher(
-            requireActivity().activityResultRegistry
-        )
-
-        lifecycle.addObserver(mGoogleLauncher)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,25 +29,34 @@ class AuthorizationFragment : Fragment() {
         mBinding = AuthorizationFragmentBinding.inflate(layoutInflater, container, false)
 
         mBinding.btnAuth.setOnClickListener {
-            if (mBinding.inputAuthLogin.text.toString().isNotEmpty() &&
-                mBinding.inputAuthPassword.text.toString().isNotEmpty()
+            val login = mBinding.inputAuthLogin.text.toString()
+            val password = mBinding.inputAuthPassword.text.toString()
+            if (login.isNotEmpty() &&
+                password.isNotEmpty()
             ) {
-                mViewModel.authenticationUser(
-                    mBinding.inputAuthLogin.text.toString(),
-                    mBinding.inputAuthPassword.text.toString()
-                ).observe(viewLifecycleOwner) {
-                        user -> checkUserRole(user)
-                        mSharedPreferences.edit {
-                            putString("Login", user?.login)
-                        }
-                }
+                val response = mViewModel.authenticationUser(
+                    login,
+                    password
+                )
+                response.observe(viewLifecycleOwner, {
+                    try {
+                        requireContext()
+                            .getSharedPreferences("AuthKey", Context.MODE_PRIVATE).edit {
+                                putString("Login", login)
+                            }
+
+                        bottomNavShow(it)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                })
             } else {
-                Toast.makeText(context, "Incorrect data!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "One field is empty!",Toast.LENGTH_SHORT).show()
             }
         }
 
         mBinding.btnAuthGoogle.setOnClickListener {
-            mGoogleLauncher.launchGoogleSignIn(mSignInIntent)
+
         }
 
         mViewModel = ViewModelProvider(this)[AuthorizationViewModel::class.java]
@@ -84,70 +64,20 @@ class AuthorizationFragment : Fragment() {
         return mBinding.root
     }
 
-    private fun checkUserRole(user: User?) {
-        if (user != null) {
-            val bottomNav = (requireActivity() as MainActivity)
-                .binding
-                .bottomNavigation
+    private fun bottomNavShow(user: AuthUserResponse) {
+        val bottomNav = (requireActivity() as MainActivity)
+            .binding
+            .bottomNavigation
 
-            bottomNav.visibility = View.VISIBLE
+        bottomNav.visibility = View.VISIBLE
 
-            if (user.role != Role.User) {
-                bottomNav.menu.findItem(R.id.add_book_fragment).isVisible = true
-            }
-
-            view?.findNavController()?.navigate(
-                AuthorizationFragmentDirections.actionAuthToMyAcc()
-            )
-        } else {
-            Toast.makeText(context, "Incorrect user",Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun onResultListener(intent: Intent?) {
-        if (intent == null)
-            return
-
-        val userInfo = mGoogleSignInLogic.handleSignInResult(intent)
-
-        if (userInfo != null) {
-            checkUserRole(
-                User(
-                    login = userInfo[0],
-                    name = userInfo[1],
-                    lastName = userInfo[2],
-                    role = Role.User
-                )
-            )
-
-            mViewModel.authenticationUser(userInfo[0], "")
-            mSharedPreferences.edit {
-                putString("Login", userInfo[0])
-            }
-        } else {
-            Toast.makeText(context, "Incorrect Google user",Toast.LENGTH_SHORT).show()
+        if (user.role != Role.User) {
+            bottomNav.menu.findItem(R.id.add_book_fragment).isVisible = true
         }
 
-    }
-
-    inner class GoogleLauncher (
-        private val registry : ActivityResultRegistry
-        ): DefaultLifecycleObserver {
-        lateinit var getContent : ActivityResultLauncher<Intent>
-
-        override fun onCreate(owner: LifecycleOwner) {
-            getContent = registry.register(
-                "Useless key",
-                owner,
-                ActivityResultContracts.StartActivityForResult()
-            ) {
-                onResultListener(it.data)
-            }
-        }
-
-        fun launchGoogleSignIn(intent: Intent) {
-            getContent.launch(intent)
-        }
+        findNavController().navigate(
+            AuthorizationFragmentDirections.actionAuthToMyAcc()
+        )
     }
 
 }

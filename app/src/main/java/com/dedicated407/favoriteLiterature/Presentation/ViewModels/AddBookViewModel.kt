@@ -1,20 +1,27 @@
 package com.dedicated407.favoriteLiterature.Presentation.ViewModels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.util.Log
+import androidx.lifecycle.*
 import com.dedicated407.favoriteLiterature.Domain.Model.Book
-import com.dedicated407.favoriteLiterature.Presentation.Repository.Repository
-import com.dedicated407.favoriteLiterature.Presentation.Room.Model.BookDTO
+import com.dedicated407.favoriteLiterature.Presentation.Repository.Server.ServerRepository.BookRepository
+import kotlinx.coroutines.launch
 
-class AddBookViewModel : ViewModel() {
+class AddBookViewModel(
+    private val bookRepository: BookRepository
+) : ViewModel() {
     private val mImage = MutableLiveData<String?>()
     val image: LiveData<String?>
         get() = mImage
 
-    fun addBook(book: Book) {
-        Repository.getBookRepository().addBook(BookDTO(book))
-    }
+    fun addBook(book: Book) =
+        viewModelScope.launch {
+            try {
+                bookRepository.addBook(book)
+                Log.d("AddedBook", "The book was added correctly!")
+            } catch (e: Throwable) {
+                e.printStackTrace()
+            }
+        }
 
     fun setImage(image: String?) {
         mImage.value = image

@@ -8,14 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.dedicated407.favoriteLiterature.Presentation.Repository.ImageLoader
+import com.dedicated407.favoriteLiterature.Presentation.Repository.Server.ServerRepository.BookRepository
 import com.dedicated407.favoriteLiterature.Presentation.ViewModels.BookInfoViewModel
 import com.dedicated407.favoriteLiterature.databinding.BookInfoFragmentBinding
 import java.lang.Exception
 
 class BookInfoFragment : Fragment() {
-    private val mViewModel: BookInfoViewModel by viewModels()
+    private lateinit var mViewModel: BookInfoViewModel
     private var mBinding: BookInfoFragmentBinding? = null
     private val args: BookInfoFragmentArgs by navArgs()
 
@@ -24,9 +25,10 @@ class BookInfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+        mViewModel = BookInfoViewModel(BookRepository(ImageLoader(requireContext())))
         mBinding = BookInfoFragmentBinding.inflate(layoutInflater, container, false)
 
-        mViewModel.getBook(args.bookId).observe(viewLifecycleOwner, { it ->
+        mViewModel.getBook(args.bookId).observe(viewLifecycleOwner, {
             it?.let { book ->
                 try {
                     mBinding!!.bookInfoImage.setImageBitmap(
@@ -40,7 +42,7 @@ class BookInfoFragment : Fragment() {
                     e.printStackTrace()
                 }
                 mBinding!!.bookInfoName.text = book.name
-                mBinding!!.bookInfoAuthor.text = book.author.toString()
+                mBinding!!.bookInfoAuthor.text = book.authorName
                 mBinding!!.bookInfoDescription.text = book.description
 
                 mBinding?.bookInfoShare?.setOnClickListener {

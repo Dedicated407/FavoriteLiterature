@@ -1,16 +1,24 @@
 package com.dedicated407.favoriteLiterature.Presentation.ViewModels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import com.dedicated407.favoriteLiterature.Domain.Model.Book
-import com.dedicated407.favoriteLiterature.Presentation.Repository.Repository
+import androidx.lifecycle.*
+import com.dedicated407.favoriteLiterature.Presentation.Repository.Server.Models.BookListViewDTO
+import com.dedicated407.favoriteLiterature.Presentation.Repository.Server.ServerRepository.BookRepository
 
-class BooksListViewModel : ViewModel() {
-    fun getBooksList(): LiveData<List<Book>> {
-        return Repository.getBookRepository().getAllBooks()
-    }
+class BooksListViewModel(
+    private val bookRepository: BookRepository
+) : ViewModel() {
+    private val mResponse: MutableLiveData<List<BookListViewDTO>> = MutableLiveData()
 
-    fun deleteBook(book: Book) {
-        Repository.getBookRepository().deleteBook(book)
-    }
+    fun getAllBooks(): LiveData<List<BookListViewDTO>> =
+        liveData(viewModelScope.coroutineContext) {
+            val books = bookRepository.getAllBooks()
+            books.forEach { book ->
+                book.images[0] = bookRepository.downloadImage(book.id.toString())
+            }
+            mResponse.value = books
+
+            emitSource(
+                mResponse
+            )
+        }
 }
