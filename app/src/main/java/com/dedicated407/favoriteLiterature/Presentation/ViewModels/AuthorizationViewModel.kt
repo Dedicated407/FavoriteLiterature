@@ -10,9 +10,9 @@ import kotlinx.coroutines.launch
 
 class AuthorizationViewModel : ViewModel() {
     private val repository: AuthUserRepository = AuthUserRepository()
-    public val mResponse: MutableLiveData<AuthUserResponse> = MutableLiveData()
+    private val mResponse: MutableLiveData<AuthUserResponse> = MutableLiveData()
 
-    fun authenticationUser(login: String, password: String) {
+    fun authenticationUser(login: String, password: String): MutableLiveData<AuthUserResponse> {
         viewModelScope.launch {
             repository.authenticationUser(login, password)?.let {
                 mResponse.value = AuthUserResponse(
@@ -24,5 +24,7 @@ class AuthorizationViewModel : ViewModel() {
                 ServiceLocator.getInstance().jwtToken = it.jwtToken
             }
         }
+
+        return mResponse
     }
 }

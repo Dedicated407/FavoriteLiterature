@@ -34,19 +34,18 @@ class AuthorizationFragment : Fragment() {
             if (login.isNotEmpty() &&
                 password.isNotEmpty()
             ) {
-                mViewModel.authenticationUser(
+                val response = mViewModel.authenticationUser(
                     login,
                     password
                 )
-                mViewModel.mResponse.observe(viewLifecycleOwner, {
-                    response ->
-                    if (response != null) {
+                response.observe(viewLifecycleOwner, {
+                    if (it != null) {
                         requireContext()
                             .getSharedPreferences("AuthKey", Context.MODE_PRIVATE).edit {
                                 putString("Login", login)
                             }
 
-                        bottomNavShow(response)
+                        bottomNavShow(it)
                     } else {
                         Toast.makeText(context, "Incorrect data!", Toast.LENGTH_SHORT).show()
                     }
